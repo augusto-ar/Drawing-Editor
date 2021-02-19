@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./lib/fabric.min.js"></script>
+    <script src="./src/Drawing.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Painel de desenho</h1>
+        <div class="row drawingToolbar bg-secondary text-light">
+            <div class="btn-toolbar">
+                <label class="col-form-label controlLabel">Tools:</label>
+                <div class="d-inline-block">
+                    <div class="btn-group btn-group-toggle" role="group" data-toggle="buttons"
+                        aria-label="Drawing Components">
+                        <label class="btn btn-success" title="Seletor">
+                            <input type="radio" name="options" autocomplete="off" value="Seletor"
+                                onclick="DrawingType(this.value)">
+                            <i class="fa fa-mouse-pointer"></i>
+                        </label>
+                        <label class="btn btn-success" title="Linha">
+                            <input type="radio" name="options" value="Linha" onclick="DrawingType(this.value)"
+                                autocomplete="off">
+                            <svg width="13px" height="15px" viewBox="2 0 13 17">
+                                <line x1="0" y1="13" x2="13" y2="0" stroke="white" stroke-width="2px"></line>
+                            </svg>
+                        </label>
+                        <label class="btn btn-success" title="Circulo">
+                            <input type="radio" name="options" value="Circulo" onclick="DrawingType(this.value)"
+                                autocomplete="off"> <i class="fa fa-circle-o"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div id="container-canvas" style="margin: 0px;" class="row">
+                    <div id="canvas" style="border: 1px solid rgba(0,0,0,0.22);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var editor;
+    $(function () {
+        var canvasHeight = (window.innerHeight - $('#canvas').offset().top) * .9;
+        var canvasWidth = $('#canvas').width();
+
+        // A tela é criada dentro deste construtor, passado o id da div.
+        editor = new DrawingEditor('canvas', canvasHeight, canvasWidth);
+    });
+
+    function DrawingType(tipo) {
+        editor.setDrawingMode(tipo);
+    }
+</script>
+
+</html>
